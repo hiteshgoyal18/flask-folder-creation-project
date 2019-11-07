@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% block content %}
+    <meta charset="UTF-8">
+    <title>{{ Title }}</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('form').on('submit', function (event) {
+                $.ajax({
+                    data: {
+                        make_folder: $('#make_folder').val()
+                    },
+                    type: 'POST',
+                    url: '/home'
+                }).done(function (data) {
+                        $('#output').text(data.Message).show();
+                });
+                event.preventDefault();
+            });
+        });
+     </script>
+    {% endblock %}
+</head>
+<body>
+<br>
+<br>
+<form class="form-inline">
+<!--First Name-->
+<div class="form-group">
+<label class="sr-only">Folder Name</label>
+<input type="text" class="form-control" name="make_folder" id="make_folder" placeholder="Folder Name">
+</div>
+<!--Last Name-->
+
+
+<!--Submit Button-->
+<button type="submit" class="btn btn-default">Submit</button>
+</form>
+</br>
+<div id="output"></div>
+</br>
+
+
+</body>
+</html>
